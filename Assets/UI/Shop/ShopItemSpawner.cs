@@ -9,12 +9,12 @@ public class ShopItemSpawner : MonoBehaviour
         int run = 0;
         foreach(Liquid Drink in InventoryManager.Instance.Liquids)
         {
-            run++;
-            if(run < 8){
+            if(run < 10){
                 ShopItem Item = Instantiate(ItemPrefab);
                 Item.transform.SetParent(gameObject.transform, false);
                 Item.OnSpawn(Drink.color, Drink.liquidName, Drink.price);
             }
+            run++;
         }    
     }
 }
