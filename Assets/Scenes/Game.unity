@@ -999,7 +999,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8fcfe8ce52e8bb34c90d90bdd50cc175, type: 2}
   - {fileID: 11400000, guid: 930c0fe5e094aa64c817df2a07c80d55, type: 2}
   - {fileID: 11400000, guid: dcb22047241bf3c4e8915f44af9ae0e8, type: 2}
-  Funds: 10
+  Funds: 30
 --- !u!1001 &471168799
 PrefabInstance:
   m_ObjectHideFlags: 0

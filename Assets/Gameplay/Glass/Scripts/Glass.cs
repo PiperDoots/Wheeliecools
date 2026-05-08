@@ -36,6 +36,7 @@ public class Glass : MonoBehaviour
 	private float fillAmount = 0f;
 	public Color mixedColor = Color.white;
 	public float totalFillAdded = 0f;
+	public float Capacity = 10f; //Technically in cL, how much goes into one full glass (can differ per glass type)
 
 	private Dictionary<Liquid, float> liquidAmounts = new Dictionary<Liquid, float>();
 
