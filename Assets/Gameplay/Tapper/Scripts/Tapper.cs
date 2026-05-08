@@ -1,13 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
+using System.Collections.Generic;
+using TMPro;
 
 public class Tapper : MonoBehaviour
 {
 	// Fill up glasses with a liquid, currently very very manual with Keys
 
 	public GlassSpot glassSpot;
+	
+	[SerializeField] private Renderer selector;
+	[SerializeField] private TextMeshPro drinkTitle;
+	[SerializeField] private TextMeshPro liquidCounter;
 
-	public Liquid[] liquids = new Liquid[0];
+    private Liquid[] liquids = new Liquid[11];
+    private InventoryManager Inventory;
 	private int liquidIndex = 0;
 
 	[Header("Keybindings")]
@@ -20,6 +28,13 @@ public class Tapper : MonoBehaviour
 	public Color ActiveColour => (liquids != null && liquids.Length > 0) ? liquids[liquidIndex].color : Color.white;
 	public Liquid ActiveLiquid => (liquids != null && liquids.Length > 0) ? liquids[liquidIndex] : null;
 
+	public float LiquidLeft;
+	void Start()
+	{
+		Inventory = InventoryManager.Instance;
+		Array.Copy(Inventory.Liquids,liquids,Inventory.Liquids.Length);
+	}
+
 	void Update()
 	{
 		if (glassSpot == null) return;
@@ -27,6 +42,7 @@ public class Tapper : MonoBehaviour
 		HandleLiquidSelection();
 		HandleFilling();
 		HandleReset();
+		HandleOptics();
 	}
 
 	private void HandleLiquidSelection()
@@ -50,13 +66,24 @@ public class Tapper : MonoBehaviour
 		Glass target = SelectedGlass;
 		if (target == null || target.IsFull) return;
 
-		target.AddFill(target.FillDelta, ActiveLiquid);
+		float amount = target.FillDelta;
+		if(Inventory.AmountOfLiquid(ActiveLiquid) > amount){
+			target.AddFill(amount, ActiveLiquid);
+			Inventory.TakeLiquid(ActiveLiquid, amount * target.Capacity); //Multiply by the capacity to get how many cL
+		}
 	}
 
 	private void HandleReset()
 	{
 		if (Keyboard.current[resetGlass].wasPressedThisFrame)
 			SelectedGlass?.ResetGlass();
+	}
+
+	private void HandleOptics()
+	{
+		selector.material.color = ActiveColour;
+		drinkTitle.text = ActiveLiquid.liquidName;
+		liquidCounter.text = Math.Round(Inventory.AmountOfLiquid(ActiveLiquid),2).ToString() + "cL";
 	}
 
 	void OnDrawGizmos()

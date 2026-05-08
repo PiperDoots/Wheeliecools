@@ -147,6 +147,7 @@ MonoBehaviour:
   fillDuration: 3
   mixedColor: {r: 1, g: 1, b: 1, a: 1}
   totalFillAdded: 0
+  Capacity: 15
 --- !u!114 &8980034471907550190
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -7658770404885116245, guid: 04ed7a30616d75345afc2a8c831869e3, type: 3}
+      propertyPath: Capacity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -7658770404885116245, guid: 04ed7a30616d75345afc2a8c831869e3, type: 3}
       propertyPath: glassType
       value: 1
       objectReference: {fileID: 0}

@@ -46,15 +46,27 @@ public class InventoryManager : MonoBehaviour
         return LiquidsInventory[LiquidName];
     }
 
+    public float AmountOfLiquid(Liquid Drink) //Works both ways
+    {
+        return LiquidsInventory[Drink.liquidName];
+    }
+
+
     public bool TakeLiquid(string LiquidName, float amount)
     {
         float Available = LiquidsInventory[LiquidName];
         if(Available - amount > 0)
         {
             LiquidsInventory[LiquidName] -= amount;
+            LiquidsInventory[LiquidName] = Math.Max(LiquidsInventory[LiquidName], 0); //Don't go below 0 doofus
             return true;
         }
         return false; //You can't take this out if you don't have this much
+    }
+
+    public bool TakeLiquid(Liquid Blergh, float amount)
+    {
+        return TakeLiquid(Blergh.liquidName, amount);
     }
 
     public void AddLiquid(string LiquidName, float amount)
