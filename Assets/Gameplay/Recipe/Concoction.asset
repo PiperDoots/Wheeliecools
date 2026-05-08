@@ -15,10 +15,10 @@ MonoBehaviour:
   recipeName: The Concoction
   ingredients:
   - liquid: {fileID: 11400000, guid: 930c0fe5e094aa64c817df2a07c80d55, type: 2}
-    ratio: 0.2
+    ratio: 0.25
   - liquid: {fileID: 11400000, guid: 8fcfe8ce52e8bb34c90d90bdd50cc175, type: 2}
-    ratio: 0.2
+    ratio: 0.25
   - liquid: {fileID: 11400000, guid: 39ee696d51ffb0a459f5a468f3f3e19e, type: 2}
-    ratio: 0.2
+    ratio: 0.25
   - liquid: {fileID: 11400000, guid: 74cf53834282df142addf738a2eb5f3b, type: 2}
-    ratio: 0.2
+    ratio: 0.25

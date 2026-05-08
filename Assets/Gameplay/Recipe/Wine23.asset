@@ -15,8 +15,8 @@ MonoBehaviour:
   recipeName: Wine '23
   ingredients:
   - liquid: {fileID: 11400000, guid: d0ac9bf789f95d84db917c4206743d5f, type: 2}
-    ratio: 0.6
+    ratio: 0.75
   - liquid: {fileID: 11400000, guid: dcb22047241bf3c4e8915f44af9ae0e8, type: 2}
-    ratio: 0.3
+    ratio: 0.25
   - liquid: {fileID: 11400000, guid: 7f52fc5ad57d30d41b1121b5beb6bd59, type: 2}
-    ratio: 0.1
+    ratio: 0.25

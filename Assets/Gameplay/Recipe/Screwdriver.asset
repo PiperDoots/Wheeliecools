@@ -15,6 +15,6 @@ MonoBehaviour:
   recipeName: Screwdriver
   ingredients:
   - liquid: {fileID: 11400000, guid: 7f52fc5ad57d30d41b1121b5beb6bd59, type: 2}
-    ratio: 0.67
+    ratio: 0.75
   - liquid: {fileID: 11400000, guid: 74cf53834282df142addf738a2eb5f3b, type: 2}
-    ratio: 0.33
+    ratio: 0.25

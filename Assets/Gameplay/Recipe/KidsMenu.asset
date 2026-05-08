@@ -15,4 +15,4 @@ MonoBehaviour:
   recipeName: Kid's Menu
   ingredients:
   - liquid: {fileID: 11400000, guid: 7f52fc5ad57d30d41b1121b5beb6bd59, type: 2}
-    ratio: 0.75
+    ratio: 1

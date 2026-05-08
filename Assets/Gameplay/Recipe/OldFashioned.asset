@@ -19,4 +19,4 @@ MonoBehaviour:
   - liquid: {fileID: 11400000, guid: 4fcf3af32f3248143b6a3d0428f5e08f, type: 2}
     ratio: 0.25
   - liquid: {fileID: 11400000, guid: 7f52fc5ad57d30d41b1121b5beb6bd59, type: 2}
-    ratio: 0.1
+    ratio: 0.25
