@@ -4,10 +4,6 @@ public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private string SceneName;
 
-    void Start()
-    {
-        
-    }
 
     public void LoadScene()
     {
@@ -17,6 +13,9 @@ public class SceneLoader : MonoBehaviour
                 AudioManager.Instance.SwitchMusic(1);
                 break;
             case "StartMenu":
+                AudioManager.Instance.SwitchMusic(0);
+                break;
+            case "EndMenu":
                 AudioManager.Instance.SwitchMusic(0);
                 break;
             default:

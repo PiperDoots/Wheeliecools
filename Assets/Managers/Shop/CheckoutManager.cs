@@ -9,7 +9,7 @@ public class CheckoutManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI Listing;
     [SerializeField] private TextMeshProUGUI TotalCost;
     private Dictionary<Liquid, int> Cart = new Dictionary<Liquid,int>(); //Liquid and how many liters we ordered
-    public float PercentageFee;
+    public float PercentageFee = 10f;
 
 	public static CheckoutManager Instance { get; private set; }
 	private void Awake()
@@ -28,11 +28,22 @@ public class CheckoutManager : MonoBehaviour
     void Start()
     {
         Inventory = InventoryManager.Instance;
+        //RealWheel = Instantiate(WheelPrefab); // Spin that thang
     }
 
     public void AddToCart(string DrinkName)
     {
-        Cart[Inventory.NameToLiquid(DrinkName)] += 1;
+        Liquid Drink = Inventory.NameToLiquid(DrinkName);
+        Debug.Log($"Adding {DrinkName}, {Cart.TryGetValue(Drink, out int wawa)}");
+        if(Cart.TryGetValue(Drink, out int value)) //Check if it exists
+        {
+            Cart[Drink] += 1;
+        }
+        else
+        {
+            Cart.Add(Drink, 1);
+        }
+        FormatCart();
     }
 
     public void RemoveFromCart(string DrinkName)
@@ -43,10 +54,12 @@ public class CheckoutManager : MonoBehaviour
         {
             Cart.Remove(Wawa);
         }
+        FormatCart();
     }
 
-    public void FormatCart()
+    private void FormatCart()
     {
+        Listing.text = ""; //Clear it out first
         int loop = 0;
         foreach(var (Thang, amount) in Cart)
         {
@@ -59,11 +72,11 @@ public class CheckoutManager : MonoBehaviour
             }
         }
         TotalCost.text = $"Subtotal: ${CalculateTotalPrice(0)}\n";
-        TotalCost.text = $"Fee: %{Math.Round(PercentageFee)}" + "\n";
-        TotalCost.text = $"Total: ${CalculateTotalPrice(PercentageFee)}";
+        TotalCost.text += $"Fee: %{Math.Round(PercentageFee)}" + "\n";
+        TotalCost.text += $"Total: ${CalculateTotalPrice(PercentageFee)}";
     }
 
-    public float CalculateItemPrice(Liquid Slurm)
+    private float CalculateItemPrice(Liquid Slurm)
     {
         float Amount;
         Amount = Cart[Slurm] * Slurm.price;
@@ -71,24 +84,36 @@ public class CheckoutManager : MonoBehaviour
     }
 
     //A negatiev fee is a discount
-    public float CalculateTotalPrice(float Fee)
+    private float CalculateTotalPrice(float Fee)
     {
         float Total = 0;
         foreach(var (Thang, amount) in Cart)
         {
             Total += CalculateItemPrice(Thang);
         }
-        Total *= 1f + Fee;
-        return Total;
+        Total *= 1f + (Fee/100);
+        return (float)Math.Round(Total, 2); //Just in case we get fractional cents
     }
 
-    public void Purchase(Liquid BoughtLiquid)
+    private void CompletePurchase()
+    {
+        if(Inventory.Funds > CalculateTotalPrice(PercentageFee)){
+            foreach (var (Bottle, amount) in Cart)
+            {
+                float price = Bottle.price * amount * (1f + (PercentageFee/100));
+                Purchase(Bottle, amount, price);
+            }
+            Cart.Clear(); //Don't forget to empty that out
+        }
+    }
+
+    public void Purchase(Liquid BoughtLiquid, int amount, float price)
     {
         float Funds = Inventory.Funds;
-        Funds -= BoughtLiquid.price;
+        Funds -= price;
         if(Funds > 0) //Oh you can actually afford it!
         {
-            Inventory.AddLiquid(BoughtLiquid.liquidName, 100f); //100cL, so a Liter of it (price is per liter)
+            Inventory.AddLiquid(BoughtLiquid.liquidName, 100f * amount); //100cL, so a Liter of it (price is per liter)
             Inventory.Funds = (float)Math.Round(Funds, 2);
         }
     }

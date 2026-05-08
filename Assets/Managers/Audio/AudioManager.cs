@@ -1,11 +1,25 @@
 using UnityEngine;
+using System.Collections;
+
 public class AudioManager : MonoBehaviour
 {
 
     public float MusicVolume = 0.5f;
     public float SFXVolume = 0.5f;
     [SerializeField] private AudioClip[] Songs;
+    /*
+    0 - Menu theme
+    1 - First gameplay song
+    2 - Second gameplay song
+    3 - Shop theme
+    4 - Ending theme
+    */
     private AudioSource MusicPlayer;
+    private int QueueTime = 0;
+    private bool FirstTrack = false;
+
+    private AudioClip Interrupted;
+    private int InterruptResumeTime;
 
     // Singleton design pattern, only 1 AudioManager can exist at a time.
     public static AudioManager Instance { get; private set; }
@@ -33,6 +47,17 @@ public class AudioManager : MonoBehaviour
         PlayMusic();
     }
 
+    void Update()
+    {
+        double time = AudioSettings.dspTime;
+
+        if (time + 1.0f > QueueTime)
+        {
+            int Track = FirstTrack ? 2 : 1;
+            SwitchMusic(Track);
+        }
+    }
+
     private void PlayMusic()
     {
         //Always start playing the menu theme
@@ -55,6 +80,30 @@ public class AudioManager : MonoBehaviour
     public void SwitchMusic(int track)
     {
         MusicPlayer.clip = Songs[track]; //Change to selected
+        if(track == 1 || track == 2)
+        {
+            FirstTrack = !FirstTrack;
+            MusicPlayer.loop = false;
+            QueueTime = (int)AudioSettings.dspTime + (int)Songs[track].length; //When the next song should play    
+        }
         MusicPlayer.Play();
     }
+
+    //This is basically only used so we can switch to the shop music and then back to the game
+    public void InterruptWith(int track, bool looping)
+    {
+        Interrupted = MusicPlayer.clip;
+        InterruptResumeTime = MusicPlayer.timeSamples;
+        MusicPlayer.loop = looping;
+        SwitchMusic(track);
+    }
+
+    public void ResumeTrack(bool looping)
+    {
+        MusicPlayer.loop = looping;
+        MusicPlayer.clip = Interrupted;
+        MusicPlayer.timeSamples = InterruptResumeTime;
+        MusicPlayer.Play();
+    }
+
 }
