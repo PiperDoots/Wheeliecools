@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 6502894107688978330}
   - component: {fileID: 3843481902814207654}
   - component: {fileID: 2542110890682728576}
+  - component: {fileID: 3425159536913601589}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -308,6 +309,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemBuy
   Name: {fileID: 8275431912312316647}
+--- !u!114 &3425159536913601589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930859122445144030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c7d093088756b41b265629d36c106f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonScaler
+  _hoverScale: {x: 1.1, y: 1.1, z: 1}
+  _rotate: {x: 0, y: 0, z: 2}
 --- !u!1001 &1646007693079347182
 PrefabInstance:
   m_ObjectHideFlags: 0

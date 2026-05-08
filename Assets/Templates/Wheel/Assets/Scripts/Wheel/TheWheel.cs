@@ -29,6 +29,7 @@ public class TheWheel : MonoBehaviour
     #region Events
     public UnityEvent<WheelPayload> newDirChosen;
     public UnityEvent<WheelPayload> rotationStarted;
+    public UnityEvent<WheelPayload> selectionMade;
     public UnityEvent rotationFinished;
     public UnityEvent puzzleFinished;
     #endregion
@@ -43,6 +44,8 @@ public class TheWheel : MonoBehaviour
     [SerializeField] private int[] sliceValues = new int[] { 1, 2, 3, 4 }; // these should also be lowest to greatest
 
     [SerializeField] private AnimationCurve curve; // used to evaluate how the turn animates
+
+    private bool lockUp = false;
     
     private Dictionary<Vector3, int> _valueMappings; // this gets set in Awake -- ties a direction to a baseNumber value randomly
     private WheelState _state = WheelState.AwaitingSelection; // don't touch this unless you know what you're doing lol
@@ -87,6 +90,8 @@ public class TheWheel : MonoBehaviour
 
         if (Keyboard.current[rotate].wasPressedThisFrame)
         {
+            if(lockUp) //no more spinny until we unlock it
+                return;
             Rotate();
             return;
         }
@@ -157,6 +162,7 @@ public class TheWheel : MonoBehaviour
         {
             return;
         }
+        lockUp = true;
 
         foreach (Transform c in covers)
         {
@@ -167,6 +173,8 @@ public class TheWheel : MonoBehaviour
                     c.gameObject.SetActive(true);
                     Rotate();
                     _numSelections++;
+                    _currentValue = GetCurrentWheelValue();
+                    selectionMade?.Invoke(_currentValue);
                     return;
                 }
             }
@@ -217,6 +225,7 @@ public class TheWheel : MonoBehaviour
         
         _currentValue = GetCurrentWheelValue();
         newDirChosen?.Invoke(_currentValue);
+        lockUp = false;
         
         _state = WheelState.AwaitingSelection;
     }

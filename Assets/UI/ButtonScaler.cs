@@ -19,6 +19,12 @@ public class ButtonScaler : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         Enter();
     }
 
+    public void OnClick(PointerEventData eventData)
+    {
+        Exit();    
+        Enter();
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         Exit();    
