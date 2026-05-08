@@ -145,7 +145,7 @@ public class Glass : MonoBehaviour
 		//We have to convert color to vector4 before being able to convert to vector3
 		Vector3 OurColor3 = OurColor;
 		Vector3 OtherColor3 = OtherColor;
-		Vector3 NewColor = Vector3.Slerp(OurColor, OtherColor, weight/totalFillAdded);
+		Vector3 NewColor = Vector3.Lerp(OurColor, OtherColor, weight/totalFillAdded);
 		mixedColor = new Color(NewColor.x, NewColor.y, NewColor.z, Transparency); //Now turn them back into a 4 vector color obj
 	}
 
