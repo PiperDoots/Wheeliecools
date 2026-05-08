@@ -8,6 +8,8 @@ public class CheckoutManager : MonoBehaviour
     [SerializeField] private InventoryManager Inventory;
     [SerializeField] private TextMeshProUGUI Listing;
     [SerializeField] private TextMeshProUGUI TotalCost;
+    [SerializeField] private TheWheel Wheel;
+    [SerializeField] private ShopWheel WheelValue;
     private Dictionary<Liquid, int> Cart = new Dictionary<Liquid,int>(); //Liquid and how many liters we ordered
     public float PercentageFee = 10f;
 
@@ -28,13 +30,11 @@ public class CheckoutManager : MonoBehaviour
     void Start()
     {
         Inventory = InventoryManager.Instance;
-        //RealWheel = Instantiate(WheelPrefab); // Spin that thang
     }
 
     public void AddToCart(string DrinkName)
     {
         Liquid Drink = Inventory.NameToLiquid(DrinkName);
-        Debug.Log($"Adding {DrinkName}, {Cart.TryGetValue(Drink, out int wawa)}");
         if(Cart.TryGetValue(Drink, out int value)) //Check if it exists
         {
             Cart[Drink] += 1;
@@ -43,7 +43,6 @@ public class CheckoutManager : MonoBehaviour
         {
             Cart.Add(Drink, 1);
         }
-        FormatCart();
     }
 
     public void RemoveFromCart(string DrinkName)
@@ -57,7 +56,7 @@ public class CheckoutManager : MonoBehaviour
         FormatCart();
     }
 
-    private void FormatCart()
+    public void FormatCart()
     {
         Listing.text = ""; //Clear it out first
         int loop = 0;
@@ -72,7 +71,8 @@ public class CheckoutManager : MonoBehaviour
             }
         }
         TotalCost.text = $"Subtotal: ${CalculateTotalPrice(0)}\n";
-        TotalCost.text += $"Fee: %{Math.Round(PercentageFee)}" + "\n";
+        PercentageFee -= WheelValue.value;
+        TotalCost.text += ((PercentageFee < 0) ? "Discount:" : "Fee:") + $" %{Math.Round(PercentageFee)}" + "\n";
         TotalCost.text += $"Total: ${CalculateTotalPrice(PercentageFee)}";
     }
 
@@ -95,7 +95,7 @@ public class CheckoutManager : MonoBehaviour
         return (float)Math.Round(Total, 2); //Just in case we get fractional cents
     }
 
-    private void CompletePurchase()
+    public void CompletePurchase()
     {
         if(Inventory.Funds > CalculateTotalPrice(PercentageFee)){
             foreach (var (Bottle, amount) in Cart)
@@ -104,6 +104,8 @@ public class CheckoutManager : MonoBehaviour
                 Purchase(Bottle, amount, price);
             }
             Cart.Clear(); //Don't forget to empty that out
+            FormatCart(); //And to show it
+            Wheel.Reset(); //After you complete your purchase, the wheel gets reset
         }
     }
 

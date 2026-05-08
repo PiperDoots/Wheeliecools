@@ -40,6 +40,7 @@ public class ShopNav : MonoBehaviour
         CheckoutWindow.enabled = true;
         CheckoutButton.interactable = false;
         ShopButton.interactable = true;
+        CheckoutManager.Instance.FormatCart(); //Update the cart display
     }
 
     public void ExitShop()

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
 public class WheelTester : MonoBehaviour
 {
     // THIS IS HOW YOU LEARN TO WHEEL
