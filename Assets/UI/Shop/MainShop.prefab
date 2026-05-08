@@ -227,10 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aba9f9c5ca87c1640882df359bdca713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopManager
-  Funds: 0
-  Inventory: {fileID: 0}
   PageTracker: {fileID: 4283774169664323156}
-  FundTracker: {fileID: 0}
 --- !u!1001 &325487200264785734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -265,11 +262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1379057545207388736, guid: 607a52cda3eceb946b8f1c5289517646, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1600
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 1379057545207388736, guid: 607a52cda3eceb946b8f1c5289517646, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 900
+      value: 20000
       objectReference: {fileID: 0}
     - target: {fileID: 1379057545207388736, guid: 607a52cda3eceb946b8f1c5289517646, type: 3}
       propertyPath: m_LocalPosition.x
