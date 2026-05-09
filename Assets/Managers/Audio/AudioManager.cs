@@ -20,6 +20,8 @@ public class AudioManager : MonoBehaviour
     private int QueueTime = 0;
     private bool FirstTrack = false;
     private bool SecondTrack = false;
+    private bool ThirdTrack = false;
+    private bool Gameplay = false;
 
     private AudioClip Interrupted;
     private int InterruptResumeTime;
@@ -52,8 +54,11 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
+        if (!Gameplay)
+        {
+            return;
+        }
         double time = AudioSettings.dspTime;
-
         if (time + 1.0f > QueueTime)
         {
             HandleGameplayTracks();
@@ -84,10 +89,12 @@ public class AudioManager : MonoBehaviour
         MusicPlayer.clip = Songs[track]; //Change to selected
         if(track == 1 || track == 2 || track == 4)
         {
+            Gameplay = true;
             MusicPlayer.loop = false;
             QueueTime = (int)AudioSettings.dspTime + (int)Songs[track].length; //When the next song should play    
         }
         else{
+            Gameplay = false;
             MusicPlayer.loop = true;
         }
         MusicPlayer.Play();
@@ -103,11 +110,13 @@ public class AudioManager : MonoBehaviour
         }
         else if(SecondTrack)
         {
+            ThirdTrack = true;
             SecondTrack = false;
             SwitchMusic(1);
         }
         else
         {
+            ThirdTrack = false;
             FirstTrack = true;
             SwitchMusic(4);
         }
