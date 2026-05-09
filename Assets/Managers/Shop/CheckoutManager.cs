@@ -10,6 +10,7 @@ public class CheckoutManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TotalCost;
     [SerializeField] private TheWheel Wheel;
     [SerializeField] private ShopWheel WheelValue;
+    [SerializeField] private ShopRemoverSpawner ItemRemover;
     private Dictionary<Liquid, int> Cart = new Dictionary<Liquid,int>(); //Liquid and how many liters we ordered
     public float PercentageFee = 10f;
 
@@ -42,6 +43,7 @@ public class CheckoutManager : MonoBehaviour
         else
         {
             Cart.Add(Drink, 1);
+            ItemRemover.SpawnRemovalButton(DrinkName);
         }
     }
 
@@ -108,6 +110,7 @@ public class CheckoutManager : MonoBehaviour
                 Purchase(Bottle, amount, price);
             }
             Cart.Clear(); //Don't forget to empty that out
+            ItemRemover.Reset();
             Wheel.Reset(); //After you complete your purchase, the wheel gets reset
             PercentageFee = 8f;
             WheelValue.Reset();

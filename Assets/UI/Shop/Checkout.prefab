@@ -111,6 +111,7 @@ RectTransform:
   - {fileID: 5457214236844151155}
   - {fileID: 6873783148635399294}
   - {fileID: 944899089560116133}
+  - {fileID: 4427610567167554286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -182,6 +183,82 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &6456849309114165007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4427610567167554286}
+  - component: {fileID: 1102446607304583353}
+  - component: {fileID: 3928975759554737248}
+  m_Layer: 5
+  m_Name: RemovalButtons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4427610567167554286
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456849309114165007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 536512659135108347}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 199.99998, y: 75}
+  m_SizeDelta: {x: 100, y: 450}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1102446607304583353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456849309114165007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 2
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &3928975759554737248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456849309114165007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48aac995b0168634f8b622a609671f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopRemoverSpawner
+  ItemPrefab: {fileID: 6769079831158420252, guid: 9d42cca7954e79049988fb7a3e99ff8f, type: 3}
 --- !u!1 &7498141194358282910
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +307,8 @@ MonoBehaviour:
   Listing: {fileID: 9051021253523529506}
   TotalCost: {fileID: 6625253618042562541}
   Wheel: {fileID: 0}
+  WheelValue: {fileID: 0}
+  ItemRemover: {fileID: 3928975759554737248}
   PercentageFee: 10
 --- !u!1001 &3699814166879675989
 PrefabInstance:
@@ -246,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1202285019548920541, guid: ed2e47cec7d2908429787100705bcdde, type: 2}
+      objectReference: {fileID: 1847133141112682291, guid: 95e93156d679ce14e92375f43b5d9f89, type: 2}
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_TextStyleHashCode
       value: -1183493901
@@ -392,7 +471,7 @@ PrefabInstance:
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1202285019548920541, guid: ed2e47cec7d2908429787100705bcdde, type: 2}
+      objectReference: {fileID: 1847133141112682291, guid: 95e93156d679ce14e92375f43b5d9f89, type: 2}
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
@@ -663,7 +742,7 @@ PrefabInstance:
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1202285019548920541, guid: ed2e47cec7d2908429787100705bcdde, type: 2}
+      objectReference: {fileID: 1847133141112682291, guid: 95e93156d679ce14e92375f43b5d9f89, type: 2}
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_TextStyleHashCode
       value: 97690656
@@ -784,7 +863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_text
-      value: 
+      value: ''
       objectReference: {fileID: 0}
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_fontSize
@@ -805,7 +884,7 @@ PrefabInstance:
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 1202285019548920541, guid: ed2e47cec7d2908429787100705bcdde, type: 2}
+      objectReference: {fileID: 1847133141112682291, guid: 95e93156d679ce14e92375f43b5d9f89, type: 2}
     - target: {fileID: 1930601852806165211, guid: 85be9962178ab7f4f965f864bba49bea, type: 3}
       propertyPath: m_characterSpacing
       value: 0
@@ -941,7 +1020,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 733667500774712646, guid: 9559c4f1c728945429da9454d5efa9eb, type: 3}
       propertyPath: m_Name
-      value: MenuButton
+      value: PurchaseButton
       objectReference: {fileID: 0}
     - target: {fileID: 3588974124283521369, guid: 9559c4f1c728945429da9454d5efa9eb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
